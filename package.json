@@ -20,6 +20,7 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "google-tts-api": "^2.0.2",
-    "yuuko": "^2.3.2"
+    "yuuko": "^2.3.2",
+    "eris": "https://github.com/tensoid/eris.git"
   }
 }

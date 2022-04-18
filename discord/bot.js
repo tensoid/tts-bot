@@ -5,8 +5,7 @@ const bot = new Client({
   prefix: '!'
 });
 
-bot.extendContext({ voiceConnection: null, queuedMessages: [] });
-
+bot.extendContext({ voiceConnection: null, queuedMessages: [], language: 'en' });
 
 try {
   bot
@@ -16,7 +15,6 @@ try {
 } catch (err) {
   console.error(err);
 }
-
 
 
 

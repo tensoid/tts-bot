@@ -5,24 +5,34 @@ module.exports = new EventListener("messageCreate", (message, ctx) => {
 
   if (message.author.bot) return;
   if(!ctx.voiceConnection) return;
-  if(message.content == ctx.client.prefix + "tts") return;
+  if(message.content.startsWith(ctx.client.prefix)) return;
 
 
   let queuedMessages = ctx.queuedMessages;
   queuedMessages.push(message.content);
-  ctx.client.extendContext({voiceConnection: ctx.voiceConnection, queuedMessages });
+  ctx.client.extendContext({voiceConnection: ctx.voiceConnection, queuedMessages, language: ctx.language});
      
-  let voiceConnection = ctx.voiceConnection;
-
-  tryPlayQueue(voiceConnection, queuedMessages);
+  tryPlayQueue(ctx);
 });
 
 
-function tryPlayQueue(voiceConnection, queuedMessages){
-  if(voiceConnection.playing) return;
-  if(queuedMessages.length <= 0) return;
+function tryPlayQueue(ctx){
 
-  let queuedMessage = queuedMessages.shift();
-  voiceConnection.once("end", () => tryPlayQueue(voiceConnection, queuedMessages));
-  voiceConnection.play(getAudioUrl(queuedMessage, "en", 1));
+  if(ctx.voiceConnection.playing) return;
+  if(ctx.queuedMessages.length <= 0) return;
+
+  let queuedMessage = ctx.queuedMessages.shift();
+
+  if(queuedMessage.length > 200){
+    queuedMessage = queuedMessage.substring(0, 200);
+  }
+
+  if(queuedMessage.startsWith("<@") || queuedMessage.startsWith("http") || queuedMessage.length <= 0 || typeof queuedMessage != "string"){
+    return tryPlayQueue(ctx);
+  }
+
+  ctx.voiceConnection.once("end", () => tryPlayQueue(ctx));
+  ctx.voiceConnection.play(getAudioUrl(queuedMessage, { lang: ctx.language, speed: 200 }));
 }
+  
+  

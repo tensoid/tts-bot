@@ -1,4 +1,4 @@
-const { Command, Client } = require('yuuko');
+const { Command } = require('yuuko');
 
 
 module.exports = new Command('tts', (message, args, ctx) => {
@@ -10,18 +10,18 @@ module.exports = new Command('tts', (message, args, ctx) => {
   }
 
   if(args.length == 0){
-    return message.channel.createMessage("Please provide a channel id to use for tts.");
+    return message.channel.createMessage("Please provide a channel id to use for tts retard.");
   }
-      
+  
   let ttsChannel = args[0];
 
   let channelInstance = ctx.client.getChannel(ttsChannel);
   if(channelInstance == null || channelInstance.type != 2){
-    return message.channel.createMessage("Voice channel not found.");
+    return message.channel.createMessage("Voice channel not found retard.");
   }
 
   ctx.client.joinVoiceChannel(ttsChannel).then(connection => {
-    message.channel.createMessage("TTS ready...");
+    message.channel.createMessage("Listening to retards...");
     ctx.client.extendContext({ voiceConnection: connection });
-  })
+  });
 });
