@@ -1,0 +1,25 @@
+{
+  "name": "tts-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tensoid/tts-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tensoid/tts-bot/issues"
+  },
+  "homepage": "https://github.com/tensoid/tts-bot#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "google-tts-api": "^2.0.2",
+    "yuuko": "^2.3.2"
+  }
+}
